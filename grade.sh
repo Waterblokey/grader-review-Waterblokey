@@ -1,5 +1,6 @@
 CPATH='.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
-
+CPATHW='.;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar'
+CPATHW2='.;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar'
 rm -rf student-submission
 rm -rf grading-area
 
@@ -27,7 +28,7 @@ else
 fi
 
 cp $testfile .
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" *.java
+javac -cp $CPATH *.java
 if [ $? -eq 0 ]
 then
     echo "No compilation error, running tests"
@@ -35,7 +36,7 @@ else
     echo "Compliation failed."
     exit
 fi
-java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples > Test-results.txt
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > Test-results.txt
 
 #grep "failure" Test-results.txt
 grep  'Failures' Test-results.txt > final-line.txt
